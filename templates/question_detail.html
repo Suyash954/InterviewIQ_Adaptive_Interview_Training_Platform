@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InterviewIQ – Question</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            background: radial-gradient(circle at top, #1e293b 0, #020617 40%, #000 100%);
+            color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shell {
+            width: 100%;
+            max-width: 720px;
+            margin: 24px;
+            padding: 24px 24px 20px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(129, 140, 248, 0.6);
+            color: #9ca3af;
+            background: rgba(15, 23, 42, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 20px;
+        }
+
+        .meta {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.8);
+        }
+
+        .difficulty-easy {
+            border-color: rgba(34, 197, 94, 0.85);
+            color: rgba(187, 247, 208, 0.9);
+            background: rgba(21, 128, 61, 0.22);
+        }
+
+        .difficulty-medium {
+            border-color: rgba(249, 115, 22, 0.9);
+            color: rgba(254, 215, 170, 0.96);
+            background: rgba(180, 83, 9, 0.24);
+        }
+
+        .difficulty-hard {
+            border-color: rgba(244, 63, 94, 0.9);
+            color: rgba(254, 202, 202, 0.96);
+            background: rgba(159, 18, 57, 0.27);
+        }
+
+        .question-box {
+            padding: 14px 12px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            margin: 14px 0 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e5e7eb;
+        }
+
+        .hint-text {
+            font-size: 11px;
+            color: #9ca3af;
+            margin: 0 0 6px;
+        }
+
+        .checklist {
+            margin: 4px 0 8px;
+            padding-left: 18px;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .checklist li {
+            margin-bottom: 2px;
+        }
+
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #9ca3af;
+            margin: 6px 0 12px;
+        }
+
+        .score-row input[type="range"] {
+            flex: 1;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            border-radius: 12px;
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            font-size: 13px;
+            padding: 10px 11px;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: #6b7280;
+        }
+
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.8);
+            background: rgba(15, 23, 42, 0.95);
+            color: #e5e7eb;
+            font-size: 11px;
+            padding: 5px 12px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            border-color: rgba(79, 70, 229, 0.95);
+            background: linear-gradient(to right, #6366f1, #4f46e5);
+        }
+
+        a.link {
+            color: rgba(129, 140, 248, 0.95);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="shell">
+    <div class="pill">
+        <span class="pill-dot"></span>
+        {% if request.user.is_authenticated %}
+            Practicing as <strong>{{ request.user.username }}</strong>
+        {% else %}
+            Practicing as <strong>demo user</strong>
+        {% endif %}
+    </div>
+
+    <h1>{{ question.skill.name|default:"Question" }}</h1>
+
+    <div class="meta">
+        {% if question.difficulty %}
+            {% with diff=question.difficulty|lower %}
+                <span class="difficulty {% if diff == 'easy' %}difficulty-easy{% elif diff == 'medium' %}difficulty-medium{% elif diff == 'hard' %}difficulty-hard{% endif %}">
+                    {{ question.difficulty|title }}
+                </span>
+            {% endwith %}
+        {% endif %}
+        Question ID: {{ question.id }}
+    </div>
+
+    <form method="post" style="margin: 0;">
+        {% csrf_token %}
+        <div class="question-box">
+            {{ question.question_text }}
+        </div>
+
+        <p class="hint-text">
+            Take 2–5 minutes to think out loud before writing. Focus on structure first, then details.
+        </p>
+
+        <h2 class="section-title">1. Outline your answer</h2>
+        <p class="hint-text">
+            Capture the main steps or themes you would cover.
+        </p>
+        <textarea id="answer-notes" name="notes" placeholder="Outline your answer here…"></textarea>
+
+        <h2 class="section-title">2. Quick self‑review</h2>
+        <ul class="checklist">
+            <li>Did I clarify the problem and constraints?</li>
+            <li>Did I explain my trade‑offs and reasoning?</li>
+            <li>Did I communicate clearly and at a good pace?</li>
+        </ul>
+
+        <div class="score-row">
+            <span>Self‑score (1–10):</span>
+            <input type="range" min="1" max="10" value="7" id="self-score" name="score">
+            <span id="self-score-label">7</span>
+        </div>
+
+        <div class="actions">
+            <a href="/" class="link">← Back to all questions</a>
+            <div class="btn-row">
+                <button class="btn" type="button" onclick="clearNotes()">Reset notes</button>
+                {% if next_question %}
+                    <button class="btn" type="submit" name="action" value="next">
+                        {% if next_question.id == question.id %}
+                            Finish session
+                        {% else %}
+                            Next question →
+                        {% endif %}
+                    </button>
+                {% else %}
+                    <button class="btn" type="submit" name="action" value="next">
+                        Finish session
+                    </button>
+                {% endif %}
+                <button class="btn btn-primary" type="submit" name="action" value="ai">
+                    Check with AI
+                </button>
+            </div>
+        </div>
+    </form>
+
+    {% if ai_feedback %}
+        <h2 class="section-title">AI feedback</h2>
+        <p class="hint-text">
+            This feedback is generated automatically to help you improve. Use it as guidance, not absolute truth.
+        </p>
+        <div class="question-box" style="max-height: 220px; overflow: auto; font-size: 12px; white-space: pre-wrap;">
+            {{ ai_feedback }}
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    function clearNotes() {
+        const el = document.getElementById("answer-notes");
+        if (el) {
+            el.value = "";
+            el.focus();
+        }
+    }
+
+    (function attachScoreLabel() {
+        const slider = document.getElementById("self-score");
+        const label = document.getElementById("self-score-label");
+        if (!slider || !label) return;
+        slider.addEventListener("input", function () {
+            label.textContent = slider.value;
+        });
+    })();
+</script>
+</body>
+</html>
+
