@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## InterviewIQ – Adaptive Interview Training Platform
 
 Lightweight Django app to practice interview questions, organized by skill and difficulty.
@@ -46,3 +47,6 @@ Then open `http://127.0.0.1:8000/` in your browser.
 
 You can manage all of these from the Django admin; the home page automatically lists questions for practice.
 
+=======
+# InterviewIQ_Adaptive_Interview_Training_Platform
+>>>>>>> 66128c4e9f9da2098a723bbf93e904f3d80f5112
